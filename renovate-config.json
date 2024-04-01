@@ -1,0 +1,68 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "timezone": "America/New_York",
+  "extends": ["config:base", ":disableDependencyDashboard", ":semanticCommitTypeAll(chore)"],
+  "npm": {
+    "commitMessageTopic": "{{prettyDepType}} {{depName}}",
+    "commitMessagePrefix": "chore(deps): :arrow_up: "
+  },
+  "schedule": [
+    "before 5am on Monday"
+  ],
+  "branchPrefix": "deps/",
+  "nvm": {
+    "enabled": false
+  },
+  "ignoreDeps": [
+    "node"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "all major dependency bump",
+      "groupSlug": "all-major"
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "groupName": "all minor and patch dependency bump",
+      "groupSlug": "all-patch",
+      "matchDepTypes": [
+        "dependencies",
+        "devDependencies"
+      ],
+      "automerge": true
+    },
+    {
+      "extends": "packages:linters",
+      "groupName": "linters",
+      "automerge": true
+    },
+    {
+      "extends": "packages:postcss",
+      "groupName": "postcss packages"
+    },
+    {
+      "extends": "packages:test",
+      "groupName": "test packages",
+      "automerge": true
+    },
+    {
+      "groupName": "definitelyTyped",
+      "matchPackagePrefixes": ["@types/"],
+      "automerge": true
+    },
+    {
+      "enabled": false,
+      "matchDepTypes": [
+        "engines"
+      ]
+    }
+  ]
+}
