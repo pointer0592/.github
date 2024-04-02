@@ -1,15 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "timezone": "America/New_York",
-  "extends": ["config:base", ":disableDependencyDashboard", ":semanticCommitTypeAll(chore)"],
+  "extends": ["config:base", ":disableDependencyDashboard", ":semanticCommitTypeAll(task)"],
   "npm": {
     "commitMessageTopic": "{{prettyDepType}} {{depName}}",
-    "commitMessagePrefix": "chore(deps): :arrow_up: "
+    "commitMessagePrefix": "task(stream): :arrow_up: "
   },
   "schedule": [
     "before 5am on Monday"
   ],
-  "branchPrefix": "deps/",
+  "branchPrefix": "stream/",
   "nvm": {
     "enabled": false
   },
